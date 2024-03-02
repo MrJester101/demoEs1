@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+        #polls {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #polls td, #polls th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #polls tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #polls tr:hover {
+            background-color: #ddd;
+        }
+
+        #polls th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container my-5 ">
+    <h1 class="text-center">Admin Panel<br>(Poll Question with options)<br/>
+    </h1>
+    <a th:href="@{/showNewProductForm}" class="btn btn-primary m-3"> Add Polls </a>
+    <a href="/" class="btn btn-danger text-right">Refresh</a>
+
+
+    <table id="polls" border="1" class="table table-striped table-responsive-md">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Question</th>
+            <th>Option1</th>
+            <th>Option2</th>
+            <th>Option3</th>
+            <th>Option4</th>
+            <th>Tags</th>
+            <th>Media_Url</th>
+            <th>Extracted_From</th>
+            <th>Time</th>
+            <th>Total_Interaction</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pollDocument : ${listProductDocuments}">
+            <td th:text="${pollDocument._id}"></td>
+            <td th:text="${pollDocument.question}"></td>
+            <td th:text="${pollDocument.option1.text}"></td>
+            <td th:text="${pollDocument.option2.text}"></td>
+            <td th:text="${pollDocument.option3.text}"></td>
+            <td th:text="${pollDocument.option4.text}"></td>
+            <td th:text="${pollDocument.tags}"></td>
+            <td th:text="${pollDocument.mediaUrl}"></td>
+            <td th:text="${pollDocument.extractedFrom}"></td>
+            <td th:text="${pollDocument.time}"></td>
+            <td th:text="${pollDocument.totalInteraction}"></td>
+            <td>
+                <a th:href="@{/showFormForUpdate/{id}(id=${pollDocument._id})}" class="btn btn-success">Update</a>
+                <a th:href="@{/deleteProduct/{id}(id=${pollDocument._id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
